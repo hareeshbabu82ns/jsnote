@@ -6,7 +6,7 @@ angular.module('jsNoteApp', [
         'ngSanitize',
         'ngRoute',
         'restangular',
-        'ngTable','ui.tinymce'
+        'ngTable','ui.tinymce','ui.select2'
     ])
     .config(function ($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider

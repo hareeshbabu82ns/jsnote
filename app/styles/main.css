@@ -31,6 +31,19 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
+.table > thead > tr > td.active,
+.table > thead > tr > th.active,
+.table > thead > tr.active > th,
+.table > thead > tr.active > td{
+  background-color: #f0f0f0;
+}
+.panel-success > .navbar {
+  margin-bottom: 5px;
+}
+.panel-success > .navbar-default {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
 /* Customize container */
 @media (min-width: 768px) {
   .container {

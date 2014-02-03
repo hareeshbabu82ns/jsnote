@@ -14,7 +14,8 @@
     "restangular": "*",
     "underscore": "*",
     "angular-strap": "~0.7.8",
-    "ng-table":"*"
+    "ng-table": "*",
+    "angular-ui-select2": "~0.0.5"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
