@@ -13,7 +13,7 @@
     "angular-route": "1.2.6",
     "restangular": "*",
     "underscore": "*",
-    "angular-strap": "~0.7.8",
+    "angular-strap": "~2.0.0",
     "ng-table": "*",
     "angular-ui-select2": "~0.0.5"
   },

@@ -5,9 +5,14 @@ angular.module('jsNoteApp', [
         'ngResource',
         'ngSanitize',
         'ngRoute',
-        'restangular',
+        'restangular', 'mgcrea.ngStrap',
         'ngTable','ui.tinymce','ui.select2'
     ])
+    .config(function($modalProvider) {
+      angular.extend($modalProvider.defaults, {
+        html: true
+      })
+    })
     .config(function ($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider
             .when('/', {
@@ -22,6 +27,11 @@ angular.module('jsNoteApp', [
                 templateUrl: 'partials/notes',
                 controller: 'NotesCtrl',
                 authenticate: true
+            })
+            .when('/notes/:id', {
+              templateUrl: 'partials/notes_detail',
+              controller: 'NotesDetailCtrl',
+              authenticate: true
             })
             .when('/signup', {
                 templateUrl: 'partials/signup',
