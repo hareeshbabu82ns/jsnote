@@ -14,14 +14,14 @@ angular.module('jsNoteApp')
             return ele;
         });
         config.setParentless(true);
-        config.setFullRequestInterceptor(function (element, operation, route, url, headers, params) {
-          var ret = {
-            element: element,
-            params: params,
-            headers: headers
-          };
-          return ret;
-        });
+//        config.setFullRequestInterceptor(function (element, operation, route, url, headers, params) {
+//          var ret = {
+//            element: element,
+//            params: params,
+//            headers: headers
+//          };
+//          return ret;
+//        });
       });
       mongo.localDelete = function (list, id) {
         jQuery.each(list, function (idx, ele) {

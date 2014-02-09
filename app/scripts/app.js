@@ -4,7 +4,7 @@ angular.module('jsNoteApp', [
         'ngCookies',
         'ngResource',
         'ngSanitize',
-        'ngRoute',
+        'ngRoute', 'ui.keypress', 'ui.scrollfix',
         'restangular', 'mgcrea.ngStrap',
         'ngTable','ui.tinymce','ui.select2'
     ])

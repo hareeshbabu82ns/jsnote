@@ -1,0 +1,20 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="$hide()"
+                aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Confirm Delete...</h4>
+      </div>
+      <div class="modal-body">
+        <p>Really Delete <b>{{note.name}}</b>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="$hide()">Close</button>
+        <button type="button" class="btn btn-danger" ng-click="delete(note);$hide()">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -2,7 +2,7 @@
 
 angular.module('jsNoteApp')
     .controller('NotesDetailCtrl',
-    function ($route, $routeParams, $scope, mongular, $location) {
+    function ($route, $routeParams, $scope, mongular, $location, $alert) {
       $scope.note = {};
       if ($routeParams.id && $routeParams.id != 0) {
         mongular.one('notes', $routeParams.id).get().then(function (res) {
@@ -16,11 +16,17 @@ angular.module('jsNoteApp')
                 //$scope.note = mongo.copy(note);
                 removeTinyMCE('content');
                 $location.path('notes/' + note._id);
+                $alert({title: 'Notes', content: 'save successful', type: 'info',
+                  placement: 'top-right', container: 'body',
+                  duration: 3, show: true});
               });
         } else
           $scope.note.put() //update
               .then(function () {
                 //mongo.localUpdate($scope.notes, $scope.note);
+                $alert({title: 'Notes', content: 'save successful', type: 'info',
+                  placement: 'top-right', container: 'body',
+                  duration: 3, show: true});
               });
       }
       $scope.delete = function () {
@@ -28,6 +34,9 @@ angular.module('jsNoteApp')
           $scope.note.remove().then(function () {
             removeTinyMCE('content');
             $location.path('notes');
+            $alert({title: 'Notes', content: 'Delete successful', type: 'info',
+              placement: 'top-right', container: 'body',
+              duration: 3, show: true});
           });
         }
       };
@@ -46,12 +55,13 @@ angular.module('jsNoteApp')
           "table contextmenu directionality emoticons template textcolor paste fullpage textcolor"
         ],
 
-        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
-        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+//        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+//        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
+//        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
 
-        menubar: false,
-        toolbar_items_size: 'small'
+        menubar: true,
+        toolbar_items_size: 'small',
+        height: 400
       };
 
       $scope.tagOpts = {
@@ -63,32 +73,20 @@ angular.module('jsNoteApp')
 
     })
     .controller('NotesCtrl', ['$scope', 'mongular', 'ngTableParams', '$filter',
-      '$route', '$routeParams', '$location',
-      function ($scope, mongo, ngTableParams, $filter, $route, $routeParams, $location) {
-        mongo.all('notes').getList().then(function (notes) {
-          $scope.notes = notes;
-          $scope.noteTabOpts.reload();
-        });
+      '$route', '$routeParams', '$location', '$modal', '$alert',
+      function ($scope, mongo, ngTableParams, $filter, $route, $routeParams, $location, $modal, $alert) {
+        mongo.all('notes').getList({select: "name,tags"})
+            .then(function (notes) {
+              $scope.notes = notes;
+              $scope.noteTabOpts.reload();
+            });
         $scope.notes = [];
         $scope.note = {};
+        $scope.notePreview = null;
         $scope.getNew = function () {
           $scope.note = {};
+          $scope.notePreview = null;
           $location.path('notes/' + 0);
-        };
-        $scope.save = function () {
-          if (_.isUndefined($scope.note._id)) {
-            $scope.notes.post($scope.note) // create
-                .then(function (note) {
-                  $scope.note = mongo.copy(note);
-                  $scope.notes.push(note);
-                  $scope.noteTabOpts.reload();
-                });
-          } else
-            $scope.note.put() //update
-                .then(function () {
-                  mongo.localUpdate($scope.notes, $scope.note);
-                  $scope.noteTabOpts.reload();
-                });
         };
         $scope.delete = function (note) {
           if (note)
@@ -100,16 +98,29 @@ angular.module('jsNoteApp')
               $scope.getNew();
               $scope.noteTabOpts.reload();
               $location.path('notes');
+              $alert({title: 'Notes', content: 'Delete successful', type: 'info',
+                placement: 'top-right', container: 'body',
+                duration: 3, show: true});
             });
           }
         };
-        $scope.noteShowModel = {};
-        $scope.show = function (note) {
-          $scope.noteShowModel.title = note.name;
-          $scope.noteShowModel.content = note.content;
+        $scope.cancelPreview = function () {
+          $scope.notePreview = null;
+        };
+        $scope.preview = function (note) {
+          $scope.note = note;
+          if (!note.content) {
+            note.get({single: true}).then(function (res) {
+              $scope.notePreview = res;
+              note.content = res.content;
+              $('#notePreview').html(res.content).parent('.panel').focus();
+            });
+          } else {
+            $scope.notePreview = note;
+          }
+          //$modal({title: note.name, content: note.content, show: true});
         };
         $scope.edit = function (note) {
-          $scope.note = mongo.copy(note);
           $location.path('notes/' + note._id);
         };
         $scope.search = function () {

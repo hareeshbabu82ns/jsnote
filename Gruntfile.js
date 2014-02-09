@@ -270,7 +270,8 @@ module.exports = function (grunt) {
             '.htaccess',
             'bower_components/**/*',
             'images/{,*/}*.{webp}',
-            'fonts/**/*'
+            'fonts/**/*',
+            'scripts/**/*'
           ]
         }, {
           expand: true,
@@ -389,15 +390,15 @@ module.exports = function (grunt) {
     'bower-install',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    //'autoprefixer',
     'concat',
-    'ngmin',
+    //'ngmin',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
-    'uglify',
-    'rev',
-    'usemin'
+    //'uglify',
+    //'rev',
+    //'usemin'
   ]);
 
   grunt.registerTask('heroku', function () {
@@ -406,8 +407,8 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
+    //'newer:jshint',
+    //'test',
     'build'
   ]);
 };

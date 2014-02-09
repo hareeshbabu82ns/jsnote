@@ -27,4 +27,8 @@ angular.module('jsNoteApp')
         $scope.isActive = function (route) {
             return route === $location.path();
         };
+      $scope.usrMenu = [ {
+        "text": "logout",
+        "click": "logout()"
+      }];
     });
