@@ -13,80 +13,80 @@
                 <span class="glyphicon glyphicon-search"></span>
               </button>
             </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <table class="table table-bordered table-hover"
-           ng-table="noteTabOpts">
-      <thead>
-      <tr class="active">
-        <td>
-          <a data-ng-click="getNew()">
-            <span class="glyphicon glyphicon-plus"></span>
-          </a>
-        </td>
-        <td>Name</td>
-        <td>Tags</td>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="note in $data">
-        <td>
-          <a data-ng-click="edit(note)">
-            <span class="glyphicon glyphicon-edit"></span>
-          </a>
-          <a bs-modal="note" data-template="partials/notes_del_confirm">
-            <span class="glyphicon glyphicon-trash"></span>
-          </a>
-        </td>
-        <td ng-click="preview(note)">{{note.name}}</td>
-        <td ng-click="preview(note)">{{note.tags}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-  <div class="panel panel-info" ng-show="notePreview"
-       ui-keypress="{'esc':'cancelPreview()'}" tabindex="0">
-    <div class="panel-heading">
-      <div class="row">
-        <div class="col-sm-6 col-xs-6"><h4>{{notePreview.name}}</h4></div>
-        <div class="col-sm-6 col-xs-6">
-          <div class="pull-right">
-            <button class="btn btn-info" type="button"
-                    bs-modal data-template="partials/notes_del_confirm">
-              <span class="glyphicon glyphicon-trash"></span>
-            </button>
-            <button class="btn btn-info" type="button"
-                    data-ng-click="edit(notePreview)">
+      <table class="table table-bordered table-hover"
+             ng-table="noteTabOpts">
+        <thead>
+        <tr class="active">
+          <td>
+            <a data-ng-click="getNew()">
+              <span class="glyphicon glyphicon-plus"></span>
+            </a>
+          </td>
+          <td>Name</td>
+          <td>Tags</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="note in $data">
+          <td>
+            <a data-ng-click="edit(note)">
               <span class="glyphicon glyphicon-edit"></span>
-            </button>
-            <button class="btn btn-info" type="button"
-                    data-ng-click="cancelPreview()">
-              <span class="glyphicon glyphicon-backward"></span>
-            </button>
+            </a>
+            <a bs-modal="note" data-template="partials/notes_del_confirm">
+              <span class="glyphicon glyphicon-trash"></span>
+            </a>
+          </td>
+          <td ng-click="preview(note)">{{note.name}}</td>
+          <td ng-click="preview(note)">{{note.tags}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel panel-info" ng-show="notePreview"
+         ui-keypress="{'esc':'cancelPreview()'}" tabindex="0">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-sm-6 col-xs-6"><h4>{{notePreview.name}}</h4></div>
+          <div class="col-sm-6 col-xs-6">
+            <div class="pull-right">
+              <button class="btn btn-info" type="button"
+                      bs-modal data-template="partials/notes_del_confirm">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+              <button class="btn btn-info" type="button"
+                      data-ng-click="edit(notePreview)">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+              <button class="btn btn-info" type="button"
+                      data-ng-click="cancelPreview()">
+                <span class="glyphicon glyphicon-backward"></span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="panel-body" id="notePreview" style="min-height: 400px"></div>
-    <div class="panel-footer" style="min-height: 50px">
-      <div class="pull-right">
-        <button class="btn btn-info" type="button"
-                bs-modal data-template="partials/notes_del_confirm">
-          <span class="glyphicon glyphicon-trash"></span>
-        </button>
-        <button class="btn btn-info" type="button"
-                data-ng-click="edit(notePreview)">
-          <span class="glyphicon glyphicon-edit"></span>
-        </button>
-        <button class="btn btn-info" type="button"
-                data-ng-click="cancelPreview()">
-          <span class="glyphicon glyphicon-backward"></span>
-        </button>
+      <div class="panel-body" id="notePreview" style="min-height: 400px"></div>
+      <div class="panel-footer" style="min-height: 50px">
+        <div class="pull-right">
+          <button class="btn btn-info" type="button"
+                  bs-modal data-template="partials/notes_del_confirm">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+          <button class="btn btn-info" type="button"
+                  data-ng-click="edit(notePreview)">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          <button class="btn btn-info" type="button"
+                  data-ng-click="cancelPreview()">
+            <span class="glyphicon glyphicon-backward"></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -117,6 +117,7 @@ angular.module('jsNoteApp')
             });
           } else {
             $scope.notePreview = note;
+            $('#notePreview').html(note.content).parent('.panel').focus();
           }
           //$modal({title: note.name, content: note.content, show: true});
         };
